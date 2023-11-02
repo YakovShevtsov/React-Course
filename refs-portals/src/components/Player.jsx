@@ -7,6 +7,7 @@ export default function Player() {
 
   const handleUsernameSubmit = () => {
     setUsername(playerName.current.value);
+    playerName.current.value = "";
   }
   
   return (
