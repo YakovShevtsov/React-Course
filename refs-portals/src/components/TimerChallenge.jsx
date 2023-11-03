@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
+import ResultModal from "./ResultModal";
 
 const TimerChallenge = ({title, targetTime}) => {
     const timer = useRef();
 
     const [isTimerStarted, setIsTimerStarted] = useState(false);
     const [isTimerExpired, setIsTimerExpired] = useState(false);
+    const [modal, setModal] = useState(false);
 
     const handleStartTimer = () => {
         timer.current = setTimeout(() => {
@@ -15,24 +17,28 @@ const TimerChallenge = ({title, targetTime}) => {
 
     const handleStopTimer = () => {
         clearTimeout(timer.current);
+        setModal(true);
     }
 
     return(
-        <section className="challenge">
-            <h2>{title}</h2>
-            <p className="challenge-time">
-                {targetTime} second{targetTime > 1 ? 's' : ''}
-            </p>
-            <p>
-                <button onClick={isTimerStarted ? handleStopTimer : handleStartTimer}>
-                    {isTimerStarted ? 'Stop' : 'Start'} challenge
-                </button>
-            </p>
-            <p className={isTimerStarted ? 'active' : undefined}>
-                {isTimerStarted ? 'Time is running' : 'Timer inactive'}
-            </p>
-            {isTimerExpired && <p>You lost</p>}
-        </section>
+        <>
+            {isTimerExpired && <ResultModal result='Lost' targetTime={targetTime}/>}
+            <section className="challenge">
+                <h2>{title}</h2>
+                <p className="challenge-time">
+                    {targetTime} second{targetTime > 1 ? 's' : ''}
+                </p>
+                <p>
+                    <button onClick={isTimerStarted ? handleStopTimer : handleStartTimer}>
+                        {isTimerStarted ? 'Stop' : 'Start'} challenge
+                    </button>
+                </p>
+                <p className={isTimerStarted ? 'active' : undefined}>
+                    {isTimerStarted ? 'Time is running' : 'Timer inactive'}
+                </p>
+
+            </section>
+        </>
     );
 }
 
