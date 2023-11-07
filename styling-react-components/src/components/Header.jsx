@@ -9,9 +9,7 @@ export default function Header() {
         alt="A canvas"
       />
       <h1>ReactART</h1>
-      <p style={{ color: "red", fontWeight: "bold" }}>
-        A community of artists and art-lovers.
-      </p>
+      <p>A community of artists and art-lovers.</p>
     </header>
   );
 }
