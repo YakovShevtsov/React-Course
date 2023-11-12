@@ -3,13 +3,6 @@ import { styled } from "styled-components";
 import Button from "./Button";
 import InputGroup from "./Input";
 
-const ControlContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-`;
-
 export default function AuthInputs() {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -31,8 +24,11 @@ export default function AuthInputs() {
   const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
   return (
-    <div id="auth-inputs">
-      <ControlContainer>
+    <div
+      className="w-full max-w-sm p-8 rounded shadow-md bg-gradient-to-b from-stone-700 to-stone-800 mx-auto"
+      id="auth-inputs"
+    >
+      <div className="flex-col flex gap-2 mb-6">
         <InputGroup
           invalid={emailNotValid}
           labelText="Email"
@@ -45,11 +41,11 @@ export default function AuthInputs() {
             handleInputChange("password", event.target.value)
           }
         />
-      </ControlContainer>
-      <div className="actions">
+      </div>
+      <div className="flex justify-end gap-4">
         <button
           type="button"
-          className="text-button"
+          className="text-amber-400 hover:text-amber-500"
         >
           Create a new account
         </button>
